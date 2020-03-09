@@ -22,5 +22,12 @@ class Router
         $this->routes[] = $route;
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return Match
+     */
+    public function match(Request $request): Match {
 
+    }
 }
