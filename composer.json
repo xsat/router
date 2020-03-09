@@ -1,0 +1,12 @@
+{
+  "name": "xsat/router",
+  "require": {
+    "php": "^7.4",
+    "ext-json": "^7.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "Router\\": "src/"
+    }
+  }
+}
