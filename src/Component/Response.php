@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Router;
+namespace Router\Component;
 
 use InvalidArgumentException;
 
