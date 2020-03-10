@@ -17,7 +17,7 @@ class Router
     private ?Route $default = null;
 
     /**
-     * @var array
+     * @var Route[]
      */
     private array $routes = [];
 
@@ -40,9 +40,22 @@ class Router
     /**
      * @param Request $request
      *
-     * @return Match
+     * @return Route
      */
-    public function match(Request $request): Match
+    public function match(Request $request): ?Route
     {
+        foreach ($this->routes as $route) {
+            if (
+                $route->getPath() === $request->getPath()
+                && (
+                    $route->getMethod() === null
+                    || $route->getMethod() === $request->getMethod()
+                )
+            ) {
+                return $route;
+            }
+        }
+
+        return $this->default;
     }
 }

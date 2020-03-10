@@ -21,11 +21,17 @@ use Router\Router;
 try {
     $router = new Router();
     /** @see NotFoundController::index() */
-    $router->setDefault(new Route('NotFoundController::index'));
+    $router->setDefault(
+        new Route('Router\Controller\NotFoundController::index')
+    );
     /** @see IndexController::index() */
-    $router->addRoute(new Route('IndexController::index', '/', Request::GET));
+    $router->addRoute(
+        new Route('Router\Controller\IndexController::index', '/', Request::GET)
+    );
     /** @see IndexController::test() */
-    $router->addRoute(new Route('IndexController::test', '/', Request::POST));
+    $router->addRoute(
+        new Route('Router\Controller\IndexController::test', '/', Request::POST)
+    );
 
     if (IS_CONSOLE) {
         $application = new ConsoleApplication($router);
