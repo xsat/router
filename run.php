@@ -12,7 +12,6 @@ require __DIR__ .
 
 use Router\Application\ConsoleApplication;
 use Router\Application\HttpApplication;
-use Router\Component\Request;
 use Router\Controller\IndexController;
 use Router\Controller\NotFoundController;
 use Router\Route;
@@ -26,7 +25,7 @@ try {
     );
     /** @see IndexController::index() */
     $router->addRoute(
-        new Route('Router\Controller\IndexController::index', 'run.php', Request::GET)
+        new Route('Router\Controller\IndexController::index', 'run.php')
     );
 
     if (IS_CONSOLE) {
