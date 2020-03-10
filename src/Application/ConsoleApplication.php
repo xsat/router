@@ -28,7 +28,13 @@ class ConsoleApplication extends AbstractApplication
         return new Request(
             Request::GET,
             $params[0] ?? '/',
-            $data + json_decode(file_get_contents('php://stdin'), true) ?: []
+            array_merge(
+                $data,
+                json_decode(
+                    file_get_contents('php://stdin'),
+                    true
+                ) ?: []
+            )
         );
     }
 }

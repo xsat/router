@@ -24,20 +24,14 @@ try {
     $router->setDefault(
         new Route('Router\Controller\NotFoundController::index')
     );
+    /** @see IndexController::index() */
+    $router->addRoute(
+        new Route('Router\Controller\IndexController::index', 'run.php', Request::GET)
+    );
 
     if (IS_CONSOLE) {
-        /** @see IndexController::index() */
-        $router->addRoute(
-            new Route('Router\Controller\IndexController::index', 'run.php', Request::GET)
-        );
-
         $application = new ConsoleApplication($router);
     } else {
-        /** @see IndexController::index() */
-        $router->addRoute(
-            new Route('Router\Controller\IndexController::index', '/', Request::GET)
-        );
-
         $application = new HttpApplication($router);
     }
 
@@ -45,6 +39,6 @@ try {
 } catch (Exception $exception) {
     echo $exception->getMessage(), PHP_EOL;
     echo $exception->getTraceAsString(), PHP_EOL;
-}
 
-//    var_dump($argv, file_get_contents('php://input'), file_get_contents('php://stdin'));
+    http_response_code(500);
+}
