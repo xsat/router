@@ -16,6 +16,19 @@ class ConsoleApplication extends AbstractApplication
      */
     protected function createRequest(): Request
     {
-        return new Request();
+        $params = $GLOBALS['argv'] ?? [];
+        $data = [];
+
+        foreach (array_splice($params, 1) as $param) {
+            if (preg_match('#^--(.*)=(.*)$#isU', $param, $matches)) {
+                $data[$matches[1]] = $matches[2];
+            }
+        }
+
+        return new Request(
+            Request::GET,
+            $params[0] ?? '/',
+            $data + json_decode(file_get_contents('php://stdin'), true) ?: []
+        );
     }
 }
