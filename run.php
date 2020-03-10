@@ -12,24 +12,31 @@ require __DIR__ .
 
 use Router\Application\ConsoleApplication;
 use Router\Application\HttpApplication;
+use Router\Component\Request;
+use Router\Controller\IndexController;
+use Router\Controller\NotFoundController;
+use Router\Route;
+use Router\Router;
 
 try {
+    $router = new Router();
+    /** @see NotFoundController::index() */
+    $router->setDefault(new Route('NotFoundController::index'));
+    /** @see IndexController::index() */
+    $router->addRoute(new Route('IndexController::index', '/', Request::GET));
+    /** @see IndexController::test() */
+    $router->addRoute(new Route('IndexController::test', '/', Request::POST));
+
     if (IS_CONSOLE) {
-        $application = new ConsoleApplication();
+        $application = new ConsoleApplication($router);
     } else {
-        $application = new HttpApplication();
+        $application = new HttpApplication($router);
     }
 
     $application->run();
 } catch (Exception $exception) {
     echo $exception->getMessage(), PHP_EOL;
     echo $exception->getTraceAsString(), PHP_EOL;
-
-    if (IS_CONSOLE) {
-        exit(1);
-    } else {
-        http_response_code(500);
-    }
 }
 
 //    var_dump($argv, file_get_contents('php://input'), file_get_contents('php://stdin'));

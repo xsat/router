@@ -18,9 +18,17 @@ class IndexController extends AbstractController
     public function index(): Response
     {
         return new JsonResponse(
-            [
+            $this->request->getData()
+        );
+    }
 
-            ]
+    /**
+     * @return Response
+     */
+    public function test(): Response
+    {
+        return new JsonResponse(
+            $this->request->getData()
         );
     }
 }

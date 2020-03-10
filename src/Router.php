@@ -12,9 +12,22 @@ use Router\Component\Request;
 class Router
 {
     /**
+     * @var Route|null
+     */
+    private ?Route $default = null;
+
+    /**
      * @var array
      */
     private array $routes = [];
+
+    /**
+     * @param Route $default
+     */
+    public function setDefault(Route $default): void
+    {
+        $this->default = $default;
+    }
 
     /**
      * @param Route $route
@@ -29,7 +42,7 @@ class Router
      *
      * @return Match
      */
-    public function match(Request $request): Match {
-
+    public function match(Request $request): Match
+    {
     }
 }

@@ -12,7 +12,7 @@ class Route
     /**
      * @var string
      */
-    private string $method;
+    private string $action;
 
     /**
      * @var string
@@ -20,33 +20,33 @@ class Route
     private string $path;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private string $action;
+    private ?string $method;
 
     /**
      * Route constructor.
      *
-     * @param string $method
-     * @param string $path
      * @param string $action
+     * @param string $path
+     * @param string|null $method
      */
     public function __construct(
-        string $method,
-        string $path,
-        string $action
+        string $action,
+        string $path = '/',
+        ?string $method = null
     ) {
-        $this->method = $method;
-        $this->path = $path;
         $this->action = $action;
+        $this->path = $path;
+        $this->method = $method;
     }
 
     /**
      * @return string
      */
-    public function getMethod(): string
+    public function getAction(): string
     {
-        return $this->method;
+        return $this->action;
     }
 
     /**
@@ -58,10 +58,10 @@ class Route
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getAction(): string
+    public function getMethod(): ?string
     {
-        return $this->action;
+        return $this->method;
     }
 }
